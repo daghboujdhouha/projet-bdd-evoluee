@@ -185,7 +185,7 @@ L'interface est responsive et utilise un design moderne avec :
 
 ![Mes emprunts étudiant](./Screenshots/14-student-book-emprunts.PNG)
 
-### Détails d'une réservation (Étudiant)
+### Détails d'un livre déjà emprunté (Étudiant)
 
 ![Détails d'une réservation](./Screenshots/15-student-book-reserved-details.PNG)
 
