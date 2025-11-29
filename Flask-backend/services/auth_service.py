@@ -11,11 +11,17 @@ class AuthService:
     
     def hash_password(self, password: str) -> str:
         """Hash un mot de passe"""
-        return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+        # Utiliser 'latin-1' au lieu de 'utf-8' car bcrypt peut produire des bytes non-UTF-8
+        return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('latin-1')
     
     def verify_password(self, password: str, password_hash: str) -> bool:
         """Vérifie un mot de passe"""
-        return bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8'))
+        try:
+            # Utiliser 'latin-1' pour correspondre au hash_password
+            return bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('latin-1'))
+        except Exception as e:
+            print(f"Erreur lors de la vérification du mot de passe: {str(e)}")
+            return False
     
     def register(self, username: str, email: str, password: str, role: str = 'etudiant') -> Optional[User]:
         """Enregistre un nouvel utilisateur"""

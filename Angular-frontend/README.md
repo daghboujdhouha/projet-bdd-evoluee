@@ -127,13 +127,33 @@ L'interface est responsive et utilise un design moderne avec :
 
 ## 📸 Captures d'écran
 
-### Page de connexion:
+### Page de connexion
 
-![Page de connexion](./Screenshots/1-login.png)
+![Page de connexion](./Screenshots/1-login.PNG)
 
-### Page d'inscription:
+### Page d'inscription
 
-![Page d'inscription](./Screenshots/2-register.png)
+![Page d'inscription](./Screenshots/2-register.PNG)
+
+### Tableau de bord administrateur
+
+![Tableau de bord administrateur](./Screenshots/3-admin-dashboard.PNG)
+
+### Message d'erreur de connexion
+
+![Message d'erreur de connexion](./Screenshots/4-login-error.PNG)
+
+### Ajout d'un livre (Admin)
+
+![Ajout d'un livre](./Screenshots/5-add-book.PNG)
+
+### Liste des livres
+
+![Liste des livres](./Screenshots/6-list-book.PNG)
+
+### Mes emprunts
+
+![Mes emprunts](./Screenshots/7-mes-emrunts.PNG)
 
 ## 🛠️ Technologies Utilisées
 

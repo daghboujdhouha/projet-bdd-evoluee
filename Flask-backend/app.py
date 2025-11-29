@@ -4,6 +4,7 @@ from flask_jwt_extended import JWTManager
 from config import Config
 from database import db
 from controllers import auth_controller, book_controller, user_controller, reservation_controller, borrow_controller
+from init_script import init_all
 
 def create_app():
     app = Flask(__name__)
@@ -14,6 +15,9 @@ def create_app():
     
     # Initialize database connection
     db.connect()
+    
+    # Initialize default users, books and borrows if database is empty
+    init_all()
     
     # Enable CORS
     CORS(app, resources={r"/api/*": {"origins": "*"}})
