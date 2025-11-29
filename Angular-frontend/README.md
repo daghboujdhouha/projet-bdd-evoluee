@@ -189,6 +189,10 @@ L'interface est responsive et utilise un design moderne avec :
 
 ![Détails d'une réservation](./Screenshots/15-student-book-reserved-details.PNG)
 
+### Tableau de bord enseignant
+
+![Tableau de bord enseignant](./Screenshots/16-enseignant-dashboard.png)
+
 ## 🛠️ Technologies Utilisées
 
 - **Angular 17** : Framework frontend
