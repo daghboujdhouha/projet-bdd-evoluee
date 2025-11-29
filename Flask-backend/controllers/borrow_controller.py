@@ -81,7 +81,34 @@ def get_borrow(borrow_id):
 def return_book(borrow_id):
     """Retourne un livre emprunté"""
     user_id = get_jwt_identity()
-    success = borrow_service.return_book(borrow_id, user_id)
+    
+    # Vérifier si l'utilisateur est admin
+    from services.user_service import UserService
+    user_service = UserService()
+    user = user_service.get_user_by_id(user_id)
+    is_admin = user and user.role == 'admin'
+    
+    # Valider l'ID
+    from bson import ObjectId
+    try:
+        ObjectId(borrow_id)
+    except:
+        return jsonify({'error': 'ID d\'emprunt invalide'}), 400
+    
+    # Vérifier que l'emprunt existe
+    borrow = borrow_service.get_borrow_by_id(borrow_id)
+    if not borrow:
+        return jsonify({'error': 'Emprunt non trouvé'}), 404
+    
+    # Vérifier les permissions
+    if not is_admin and borrow.user_id != user_id:
+        return jsonify({'error': 'Vous n\'avez pas la permission de retourner ce livre'}), 403
+    
+    # Vérifier que l'emprunt est actif
+    if borrow.status != 'active':
+        return jsonify({'error': f'Cet emprunt est déjà retourné (statut: {borrow.status})'}), 400
+    
+    success = borrow_service.return_book(borrow_id, user_id, is_admin)
     
     if not success:
         return jsonify({'error': 'Impossible de retourner le livre'}), 400

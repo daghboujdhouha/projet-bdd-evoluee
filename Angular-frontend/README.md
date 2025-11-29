@@ -147,9 +147,23 @@ L'interface est responsive et utilise un design moderne avec :
 
 ![Ajout d'un livre](./Screenshots/5-add-book.PNG)
 
-### Liste des livres
+### Liste des livres (Admin)
 
 ![Liste des livres](./Screenshots/6-list-book.PNG)
+
+
+### Mise à jour d'un livre (Admin)
+
+![Mise à jour d'un livre](./Screenshots/8-update-book.PNG)
+
+### Confirmation de suppression d'un livre (Admin)
+
+![Confirmation de suppression](./Screenshots/9-delete-book-confirmation.PNG)
+
+### Page de retour de livre
+
+![Page de retour](./Screenshots/10-return-page.PNG)
+
 
 ### Mes emprunts
 

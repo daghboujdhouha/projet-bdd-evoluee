@@ -69,11 +69,25 @@ class BorrowService:
             borrows.append(Borrow.from_dict(borrow_doc))
         return borrows
     
-    def return_book(self, borrow_id: str, user_id: str) -> bool:
+    def return_book(self, borrow_id: str, user_id: str, is_admin: bool = False) -> bool:
         """Retourne un livre emprunté"""
         try:
+            # Valider l'ID
+            try:
+                ObjectId(borrow_id)
+            except:
+                return False
+            
             borrow = self.get_borrow_by_id(borrow_id)
-            if not borrow or borrow.user_id != user_id or borrow.status != 'active':
+            if not borrow:
+                return False
+            
+            # Vérifier que l'emprunt est actif
+            if borrow.status != 'active':
+                return False
+            
+            # Vérifier que l'utilisateur est le propriétaire ou un admin
+            if not is_admin and borrow.user_id != user_id:
                 return False
             
             result = self.collection.update_one(
@@ -85,7 +99,7 @@ class BorrowService:
                 }}
             )
             
-            if result.modified_count > 0:
+            if result.matched_count > 0:
                 # Vérifier s'il y a des réservations en attente
                 from services.reservation_service import ReservationService
                 res_service = ReservationService()
@@ -100,6 +114,7 @@ class BorrowService:
                     self.book_service.update_book_status(borrow.book_id, 'disponible')
                 return True
             return False
-        except:
+        except Exception as e:
+            print(f"Erreur lors du retour du livre: {str(e)}")
             return False
 

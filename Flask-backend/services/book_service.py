@@ -51,18 +51,27 @@ class BookService:
     def update_book(self, book_id: str, update_data: dict) -> Optional[Book]:
         """Met à jour un livre"""
         try:
-            update_data['updated_at'] = Book().created_at  # Utiliser datetime.utcnow()
+            # Vérifier d'abord si le livre existe
+            book = self.get_book_by_id(book_id)
+            if not book:
+                return None
+            
+            # Ajouter la date de mise à jour
             from datetime import datetime
             update_data['updated_at'] = datetime.utcnow()
             
+            # Effectuer la mise à jour
             result = self.collection.update_one(
                 {'_id': ObjectId(book_id)},
                 {'$set': update_data}
             )
-            if result.modified_count > 0:
+            
+            # Retourner le livre mis à jour (même si aucune modification n'a été faite)
+            if result.matched_count > 0:
                 return self.get_book_by_id(book_id)
             return None
-        except:
+        except Exception as e:
+            print(f"Erreur lors de la mise à jour du livre: {str(e)}")
             return None
     
     def delete_book(self, book_id: str) -> bool:

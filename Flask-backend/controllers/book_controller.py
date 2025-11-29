@@ -86,15 +86,28 @@ def update_book(book_id):
     if not data:
         return jsonify({'error': 'Données manquantes'}), 400
     
+    # Vérifier que l'ID est valide
+    from bson import ObjectId
+    try:
+        ObjectId(book_id)
+    except:
+        return jsonify({'error': 'ID de livre invalide'}), 400
+    
     update_data = {}
     allowed_fields = ['title', 'author', 'genre', 'year', 'description', 'isbn', 'status']
     
     for field in allowed_fields:
         if field in data:
             if field == 'year':
-                update_data[field] = int(data[field])
+                try:
+                    update_data[field] = int(data[field])
+                except (ValueError, TypeError):
+                    return jsonify({'error': f'La valeur de "year" doit être un nombre'}), 400
             else:
                 update_data[field] = data[field]
+    
+    if not update_data:
+        return jsonify({'error': 'Aucune donnée à mettre à jour'}), 400
     
     book = book_service.update_book(book_id, update_data)
     
