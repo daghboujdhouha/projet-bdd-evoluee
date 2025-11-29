@@ -169,6 +169,26 @@ L'interface est responsive et utilise un design moderne avec :
 
 ![Mes emprunts](./Screenshots/7-mes-emrunts.PNG)
 
+### Liste des livres (Étudiant)
+
+![Liste des livres étudiant](./Screenshots/11-student-list-book.PNG)
+
+### Détails d'un livre (Étudiant)
+
+![Détails d'un livre](./Screenshots/12-student-book-details.PNG)
+
+### Livre réservé (Étudiant)
+
+![Livre réservé](./Screenshots/13-student-book-reserved.PNG)
+
+### Mes emprunts (Étudiant)
+
+![Mes emprunts étudiant](./Screenshots/14-student-book-emprunts.PNG)
+
+### Détails d'une réservation (Étudiant)
+
+![Détails d'une réservation](./Screenshots/15-student-book-reserved-details.PNG)
+
 ## 🛠️ Technologies Utilisées
 
 - **Angular 17** : Framework frontend
